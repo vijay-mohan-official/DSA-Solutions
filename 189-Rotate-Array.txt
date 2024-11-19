@@ -1,0 +1,91 @@
+Question
+-> Given an array of size N. The task is to left rotate array by D elements, where D<=N
+   Expected Time Complexity : O(N)
+   Expected Auxiliary Space : O(1) ==> No extra space or array should be used, Use the array given in question
+Ans) D is given, break point
+Step 1 : Split as two arrays in break point and reverse them individually(Using two pointer approach)
+Step 2 : Reverse the whole final array
+
+If shift to right, take D from right side. In this case rotate by 3 elements to right
+[1,2,3,4,5,6,7]
+==> 3 elements at right are [5,6,7]
+Spilt both at D and reverse
+[4,3,2,1] and [7,6,5]
+Now join both,
+==> [4,3,2,1,7,6,5]
+Then reverse again
+==> [5,6,7,1,2,3]
+
+If shift to left, take d from left side. In this case rotate by 3 elements to left
+[1,2,3,4,5,6,7]
+==> 3 elements at left are [1,2,3]
+Spilt both at D and reverse
+[3,2,1] and [7,6,5,4]
+Now join both,
+==> [4,3,2,1,7,6,5]
+Then reverse again
+==> [5,6,7,1,2,3]
+
+Here, we want to rotate to right,
+Test cases,
+Input: nums = [1,2,3,4,5,6,7], k = 3
+Output: [5,6,7,1,2,3,4]
+
+Split at the last 3 elements
+[1,2,3,4] and [5,6,7]
+
+Reverse both
+[4,3,2,1] and [7,6,5]
+
+Join both
+[4,3,2,1,7,6,5]
+
+Now reverse all together
+[5,6,7,1,2,3,4]
+
+Input: nums = [-1,-100,3,99], k = 2
+Output: [3,99,-1,-100]
+
+Split at the last 2 elements
+[-1,-100] and [3,99]
+
+Reverse both
+[-100,-1] and [99,3]
+
+Join both
+[-100,-1,99,3]
+
+Now reverse all together
+[3,99,-1,-100]
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+    // Method to rotate the array 'nums' by 'k' steps to the right
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;    // Get the length of the array
+        k %= n;  // Reduce k if it is greater than n (rotate modulo n)
+        rev(nums, 0, n - 1);    // Step 1: Reverse the entire array
+        rev(nums, 0, k - 1);    // Step 2: Reverse the first k elements
+        rev(nums, k, n - 1);    // Step 3: Reverse the remaining elements
+    }
+    
+    // Helper function to reverse a portion of the array from index 'i' to index 'j'
+    public void rev(int nums[], int i, int j) {
+        while (i < j) {    // Continue swapping until i and j meet
+            int temp = nums[i];    // Store element at index i temporarily
+            nums[i] = nums[j];     // Swap element at i with element at j
+            nums[j] = temp;        // Complete the swap by placing the temp element at j
+            i++;   // Move left pointer to the right
+            j--;   // Move right pointer to the left
+        }
+    }
+}
