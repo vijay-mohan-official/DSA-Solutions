@@ -78,7 +78,7 @@ class Solution {
         rev(nums, k, n - 1);    // Step 3: Reverse the remaining elements
     }
     
-    // Helper function to reverse a portion of the array from index 'i' to index 'j'
+    // Helper function to reverse a portion of the array from index 'i' to index 'j' (2-pointer method)
     public void rev(int nums[], int i, int j) {
         while (i < j) {    // Continue swapping until i and j meet
             int temp = nums[i];    // Store element at index i temporarily
