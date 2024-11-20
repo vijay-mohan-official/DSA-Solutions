@@ -16,6 +16,15 @@ Now join both,
 Then reverse again
 ==> [5,6,7,1,2,3]
 
+or better follow below step
+
+If shift to right, reverse the whole array first
+[7,6,5,4,3,2,1]
+Spilt both at D and reverse
+[5,6,7] and [1,2,3,4]
+Now join both,
+==> [5,6,7,1,2,3,4]
+
 If shift to left, take d from left side. In this case rotate by 3 elements to left
 [1,2,3,4,5,6,7]
 ==> 3 elements at left are [1,2,3]
@@ -25,38 +34,6 @@ Now join both,
 ==> [4,3,2,1,7,6,5]
 Then reverse again
 ==> [5,6,7,1,2,3]
-
-Here, we want to rotate to right,
-Test cases,
-Input: nums = [1,2,3,4,5,6,7], k = 3
-Output: [5,6,7,1,2,3,4]
-
-Split at the last 3 elements
-[1,2,3,4] and [5,6,7]
-
-Reverse both
-[4,3,2,1] and [7,6,5]
-
-Join both
-[4,3,2,1,7,6,5]
-
-Now reverse all together
-[5,6,7,1,2,3,4]
-
-Input: nums = [-1,-100,3,99], k = 2
-Output: [3,99,-1,-100]
-
-Split at the last 2 elements
-[-1,-100] and [3,99]
-
-Reverse both
-[-100,-1] and [99,3]
-
-Join both
-[-100,-1,99,3]
-
-Now reverse all together
-[3,99,-1,-100]
 
 
 
