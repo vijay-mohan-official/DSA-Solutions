@@ -83,6 +83,11 @@ class Solution {
 
 
 
+
+
+
+
+
 Optimized solution
 class Solution {
     public int search(int[] nums, int target) {
