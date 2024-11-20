@@ -80,3 +80,38 @@ class Solution {
         return -1;
     }
 }
+
+
+
+Optimized solution
+class Solution {
+    public int search(int[] nums, int target) {
+        int left = 0; // Initialize the left pointer
+        int right = nums.length - 1; // Initialize the right pointer
+        while (left <= right) {
+            int mid = (left + right) / 2; // Calculate the mid index
+            if (nums[mid] == target) {
+                return mid; // Target found at mid
+            }
+            // Check if the left half is sorted
+            else if (nums[mid] >= nums[left]) {
+                // Check if the target lies within the sorted left half
+                if (nums[left] <= target && target <= nums[mid]) {
+                    right = mid - 1; // Narrow the search to the left half
+                } else {
+                    left = mid + 1; // Narrow the search to the right half
+                }
+            }
+            // Right half must be sorted
+            else {
+                // Check if the target lies within the sorted right half
+                if (nums[mid] <= target && target <= nums[right]) {
+                    left = mid + 1; // Narrow the search to the right half
+                } else {
+                    right = mid - 1; // Narrow the search to the left half
+                }
+            }
+        }
+        return -1; // Return -1 if the target is not found
+    }
+}
