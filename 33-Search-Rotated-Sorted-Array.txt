@@ -11,3 +11,72 @@ The above is a rotated array, see the trend.
 In a rotated array, see from 5 to 10, value keeps on increasing.
 Then suddenly, after 10, it suddenly decreases to 1.
 This sudden decrease in value is what we should use to find the pivot.
+
+
+
+
+
+
+
+The below solution works, but time complexity provided in O(log n)
+class Solution {
+    public int search(int[] nums, int target) {
+        // Step 1: Find the pivot (the point where the array is rotated)
+        int pivot = getPivot(nums, 0, nums.length - 1);
+        // Step 2: Perform binary search in the first half (from start to pivot)
+        int val = binarySearch(nums, 0, pivot, target);
+        // Step 3: If not found in the first half, search in the second half (from pivot+1 to end)
+        if (val == -1) {
+            val = binarySearch(nums, pivot + 1, nums.length - 1, target);
+        }
+        // Return the index of the target, or -1 if not found
+        return val;
+    }
+
+    public static int getPivot(int[] nums, int l, int r) {
+        // Binary search to find the pivot point where the array is rotated
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            // Check if mid is the pivot
+            if (nums[mid] > nums[mid + 1]) {
+                return mid;
+            } 
+            // Check if mid-1 is the pivot
+            else if (nums[mid] < nums[mid - 1]) {
+                return mid - 1;
+            } 
+            // If the mid element is greater than the leftmost element,
+            // the pivot is on the right side
+            else if (nums[mid] > nums[l]) {
+                l = mid + 1;
+            } 
+            // Otherwise, the pivot is on the left side
+            else {
+                r = mid - 1;
+            }
+        }
+        // If no pivot is found (array is not rotated), return -1
+        return -1;
+    }
+
+    public static int binarySearch(int[] nums, int l, int r, int target) {
+        // Perform binary search within the specified range
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            // If the target is found, return its index
+            if (nums[mid] == target) {
+                return mid;
+            } 
+            // If the target is smaller than mid, search in the left half
+            else if (nums[mid] > target) {
+                r = mid - 1;
+            } 
+            // If the target is larger than mid, search in the right half
+            else {
+                l = mid + 1;
+            }
+        }
+        // If the target is not found, return -1
+        return -1;
+    }
+}
