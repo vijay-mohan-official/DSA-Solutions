@@ -1,3 +1,13 @@
 Question
 -> Given a sorted and rotated array A of N distinct elements which is rotated at some point, and given an element key.
    The task is to find the index of the given element key in the array A.
+Ans) Since the array is rotated and not sorted, we cannot directly proceed with binary search.
+Step 1 : We need to find the pivot.
+Step 2 : If we get the pivot, we can do binary search on each of the two array segments to find our element.
+
+How to find the pivot?
+{5,6,7,8,9,10,1,2,3}
+The above is a rotated array, see the trend.
+In a rotated array, see from 5 to 10, value keeps on increasing.
+Then suddenly, after 10, it suddenly decreases to 1.
+This sudden decrease in value is what we should use to find the pivot.
