@@ -1,0 +1,51 @@
+--> Question
+You are given positive integers n and m.
+Define two integers as follows:
+num1: The sum of all integers in the range [1, n] (both inclusive) that are not divisible by m.
+num2: The sum of all integers in the range [1, n] (both inclusive) that are divisible by m.
+Return the integer num1 - num2.
+--> Answer
+The below solution is the first solution that I found instantly and came with loops,
+class Solution {
+    public int differenceOfSums(int n, int m) {
+        int sum1 = 0;
+        int sum2 = 0;
+        for(int i=1; i<= n; i++){
+            if(i%m == 0){
+                 sum1 += i;   
+            }
+            else{
+                sum2 += i;
+            }
+        }
+        return sum2 - sum1;
+    }
+}
+
+
+But we can use basic maths to solve without loops,
+
+Sum of n numbers = 1+2+3+......+(n-1)+n = n(n+1)/2
+Also no of digits in the the range of [1,n] which are divisible by m = n/m
+
+Suppose, 1,2,3,4,5,6,7,8,9,10
+==> If m = 3 ===> 10/3 = 3
+==> If m = 2 ==> 10/2 = 5
+
+Consider m = 2
+==> Numbers divisible by 2 are 2,4,6,8,10
+==> Sum of these digits = 2 + 4 + 6 + 8 + 10
+    Taking 2 out of all these ==> 2 * (1 + 2 + 3 + 4 + 5)
+    ==> m * (1 + 2 + 3 + ......+ x)
+    ==> m * x(x+1)/2 (Note: x = n/m)
+
+
+
+class Solution {
+    public int differenceOfSums(int n, int m) {
+        int x = n/m; //No of numbers divisible by m in [1,n]
+        int num2 = m * (x*(x+1)/2); //Sum of digits divisible by m in [1,n]
+        int num1 = n*(n+1)/2 - num2;
+        return num1 - num2;
+    }
+}
