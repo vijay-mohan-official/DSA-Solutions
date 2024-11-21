@@ -1,16 +1,52 @@
 -->Question
 Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.
--->Answer
+Answer)
+Using brute force,
+Time Compexity = O(n^2)
+Space Complexity = O(1)
 class Solution {
     public int countPairs(List<Integer> nums, int target) {
         int count = 0;
         for(int i=0; i<nums.size(); i++){
-            for(int j=0; j<nums.size(); j++){
-                if(i<j && nums.get(i)+nums.get(j)<target){
+            for(int j=i+1; j<nums.size(); j++){
+                if(nums.get(i)+nums.get(j)<target){
                     count++;
                 }
             }
         }
         return count;
+    }
+}
+
+
+If we need to reduce time complexity, we can use another way.
+We need to sort the List.
+Then we add left and right and check if value is less than target.
+If greater, then we need to check to the left of the array from right side.(right = right - 1)
+If less, increment count.
+
+
+class Solution {
+    public int countPairs(List<Integer> nums, int target) {
+        int count = 0; // Variable to store the number of valid pairs
+        nums.sort((a, b) -> a - b); // Sort the list in ascending order to enable two-pointer technique
+        int right = nums.size() - 1; // Initialize the right pointer to the last index
+        int left = 0; // Initialize the left pointer to the first index
+        
+        // Loop until the left pointer is less than the right pointer
+        while (left < right) {
+            // Calculate the sum of the elements at the left and right pointers
+            if (nums.get(left) + nums.get(right) < target) {
+                // If the sum is less than the target, all pairs (left, left+1, ..., right) are valid
+                count += right - left; 
+                left++; // Move the left pointer one step to the right to explore other pairs
+            } else {
+                // If the sum is greater than or equal to the target, decrement the right pointer
+                // This narrows the range and reduces the sum
+                right--;
+            }
+        }
+        
+        return count; // Return the total count of valid pairs
     }
 }
