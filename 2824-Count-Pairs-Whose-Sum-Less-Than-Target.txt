@@ -50,3 +50,4 @@ class Solution {
         return count; // Return the total count of valid pairs
     }
 }
+Time Complexity : O(nlogn)
