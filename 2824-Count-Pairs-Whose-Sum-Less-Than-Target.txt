@@ -33,8 +33,8 @@ class Solution {
         int right = nums.size() - 1; // Initialize the right pointer to the last index
         int left = 0; // Initialize the left pointer to the first index
         
-        // Loop until the left pointer is less than the right pointer
-        while (left < right) {
+        // Loop until the left pointer not equal to the right pointer
+        while (left != right) {
             // Calculate the sum of the elements at the left and right pointers
             if (nums.get(left) + nums.get(right) < target) {
                 // If the sum is less than the target, all pairs (left, left+1, ..., right) are valid
