@@ -1,0 +1,33 @@
+--> Question
+Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+Answer)
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        // Initialize two pointers: one starting from the leftmost (smallest element),
+        // and the other from the rightmost (largest element).
+        int left = 0; 
+        int right = nums.length - 1; 
+        
+        // Create an array to store the result with the same size as the input array.
+        int result[] = new int[nums.length]; 
+        
+        // Traverse the result array from the end to the beginning.
+        for (int i = nums.length - 1; i >= 0; i--) { 
+            // Compare the absolute values of the numbers at the left and right pointers.
+            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                // If the left number's absolute value is larger, square it and place it at the current position.
+                result[i] = nums[left] * nums[left]; 
+                // Move the left pointer one step to the right.
+                left++; 
+            } else {
+                // Otherwise, square the number at the right pointer and place it at the current position.
+                result[i] = nums[right] * nums[right]; 
+                // Move the right pointer one step to the left.
+                right--; 
+            }
+        }
+        
+        // Return the sorted squares array.
+        return result; 
+    }
+}
