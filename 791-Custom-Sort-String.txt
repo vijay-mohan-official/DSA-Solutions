@@ -1,0 +1,53 @@
+--> Question
+You are given two strings order and s. All the characters of order are unique and were sorted in some custom order previously.
+
+Permute the characters of s so that they match the order that order was sorted. 
+More specifically, if a character x occurs before a character y in order, then x should occur before y in the permuted string.
+
+Return any permutation of s that satisfies this property
+
+Answer)
+class Solution {
+    public String customSortString(String order, String s) {
+        // StringBuilder to build the final result
+        StringBuilder sb = new StringBuilder();
+        
+        // Set to store the characters in 'order' for quick look-up
+        Set<Character> set = new HashSet<>();
+        
+        // Array to count occurrences of each character in 's'
+        int[] ca = new int[26];
+        
+        // Iterate through the 'order' string and add each character to the set
+        // This allows quick checking of whether a character is in the 'order'
+        for (char i : order.toCharArray()) {
+            set.add(i);
+        }
+        
+        // Iterate through the 's' string and:
+        // 1. If the character is not in the 'order', append it directly to the result
+        // 2. If the character is in the 'order', increment its count in 'ca' array
+        for (char i : s.toCharArray()) {
+            if (!set.contains(i)) {
+                sb.append(i); // append to result if character is not in 'order'
+            } else {
+                ca[i - 'a']++; // increment the count for this character
+            }
+        }
+        
+        // Iterate through the 'order' string again to append characters in the 
+        // correct order according to their frequency in 's'
+        for (char i : order.toCharArray()) {
+            int j = ca[i - 'a']; // get the count of this character in 's'
+            
+            // Append the character to the result as many times as it appears in 's'
+            while (j > 0) {
+                sb.append(i);
+                j--; // decrease the count each time
+            }
+        }
+        
+        // Return the resulting string
+        return sb.toString();
+    }
+}
