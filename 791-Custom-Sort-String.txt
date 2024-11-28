@@ -53,3 +53,52 @@ class Solution {
 }
 
 This solution is not memory efficient and was not accepted by LeetCode.
+
+
+class Solution {
+    public String customSortString(String order, String s) {
+        
+        // Step 1: Create a map to count the occurrences of each character in string s
+        Map<Character, Integer> map = new HashMap<>();
+        
+        // Iterate through each character in s and update the count in the map
+        for(char i : s.toCharArray()){
+            map.put(i, map.getOrDefault(i, 0) + 1); // Default value is 0 if character doesn't exist in the map yet
+        }
+
+        // Step 2: Initialize a StringBuilder to store the final result
+        StringBuilder ans = new StringBuilder();
+
+        // Step 3: Iterate through each character in the order string
+        // and append characters from s that appear in order.
+        for(char i : order.toCharArray()){
+            // Check if the character from order exists in the map (it was in s)
+            if(map.containsKey(i)){
+                // Get the count of the character from map
+                int count = map.get(i);
+                // Append the character the number of times it appears in s
+                while(count > 0){
+                    ans.append(i);
+                    count--;
+                }
+                // Remove the character from the map as it's already processed
+                map.remove(i);
+            }
+        }
+
+        // Step 4: After processing characters from 'order', append remaining characters
+        // that weren't part of 'order' to the result in any order.
+        for(Map.Entry<Character, Integer> entry : map.entrySet()){
+            char c = entry.getKey();
+            int count = entry.getValue();
+            // Append the remaining characters in the order they appeared in s
+            while(count > 0){
+                ans.append(c);
+                count--;
+            }
+        }
+
+        // Step 5: Return the final sorted string
+        return ans.toString();
+    }
+}
