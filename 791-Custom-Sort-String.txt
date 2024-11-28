@@ -51,3 +51,5 @@ class Solution {
         return sb.toString();
     }
 }
+
+This solution is not memory efficient and was not accepted by LeetCode.
