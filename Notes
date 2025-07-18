@@ -1,0 +1,7 @@
+Palindrome
+Negative numbers and numbers ending in 0 (except 0) can't be palindromes
+
+No need to reverse the whole number :
+Take the last digit and build a reversed version, one digit at a time.
+Stop when you’ve reversed half of the number.
+Then check: is the start of the number the same as the reversed end?
