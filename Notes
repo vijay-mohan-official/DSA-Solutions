@@ -21,3 +21,16 @@ There is exactly one solution, and you can't use the same element twice.
   If it does, return the index of the complement (from the map) and the current index.
 5. If not found, store the current number and its index in the HashMap.
 6. Repeat steps 2–5 until a valid pair is found.
+
+
+
+Roman to Integer
+Get the Roman numeral input as a string.
+
+1. Create a method to map each Roman symbol to its integer value (I=1, V=5, X=10, L=50, C=100, D=500, M=1000).
+2. Initialize a result variable to 0 for accumulating the final integer value.
+3. Loop through each character in the input string from left to right.
+4. For each character, compare its value to the next character’s value (if any):
+  If the current value is greater than or equal to the next value, add it to the result.
+  If the current value is less than the next value, subtract it from the result.
+5. After processing all characters, the result variable holds the integer equivalent
